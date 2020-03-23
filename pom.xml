@@ -55,9 +55,7 @@
                 <version>3.0.0-M4</version>
                 <configuration>
                     <includes>
-                        <include>**/When*.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/*TestSuite.java</include>
+                        <include>**/features/*.java</include>
                     </includes>
                 </configuration>
             </plugin>
