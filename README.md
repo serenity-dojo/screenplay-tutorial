@@ -149,6 +149,12 @@ Write the rest of the test body, where Petra checks her pet out and verifies tha
         assertThat(petHotel.getPets(), not(hasItem(ginger)));
 ```
 
+Make sure you import the Matchers.not()` method in your test class:
+
+```java
+import static org.hamcrest.Matchers.not;
+
+```
 ### Step 3
 
 Implement the CheckOut class (don't copy-paste!):

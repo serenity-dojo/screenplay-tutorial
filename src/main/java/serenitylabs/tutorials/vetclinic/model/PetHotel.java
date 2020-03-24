@@ -51,6 +51,11 @@ public class PetHotel {
         return checkInStrategy.attemptToCheckIn(pet);
     }
 
+    @Override
+    public String toString() {
+        return "the '" + hotelName + "' pet hotel";
+    }
+
     public Collection<Pet> getWaitingList() {
         return waitingList.getPets();
     }
