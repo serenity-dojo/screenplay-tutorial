@@ -4,10 +4,12 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.Actor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import serenitylabs.tutorials.vetclinic.features.questions.TheRegisteredGuests;
 import serenitylabs.tutorials.vetclinic.features.tasks.CheckIn;
 import serenitylabs.tutorials.vetclinic.model.Pet;
 import serenitylabs.tutorials.vetclinic.model.PetHotel;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 
@@ -29,7 +31,8 @@ public class BookAPetIntoAHotel {
         );
 
         // THEN
-        assertThat(petHotel.getPets(), hasItem(ginger));
+        //assertThat(petHotel.getPets(), hasItem(ginger));
+        petra.should(seeThat(TheRegisteredGuests.in(petHotel), hasItem(ginger)));
 
     }
 }

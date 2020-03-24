@@ -17,7 +17,7 @@ The domain is a simple one. We are writing an application for a Vet clinic, wher
 
 In the exercises for this tutorial we will be writing basic tests using the Screenplay pattern.
 
-## Exercise 1 - checking in to a pet hotel
+## Exercise 2 - asking questions
 
 ### Step 1
 Create a test class called `WhenCheckingInToThePetHotel` with a test method `petra_books_her_pet_cat_into_the_hotel()`. Configure the test to run with the `SerenityRunner` class:

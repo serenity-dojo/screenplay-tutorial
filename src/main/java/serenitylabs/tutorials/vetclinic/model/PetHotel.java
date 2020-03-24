@@ -63,4 +63,8 @@ public class PetHotel {
         }
     }
 
+    public String getHotelName() {
+        return hotelName;
+    }
+
 }
