@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class WaitingList {
@@ -21,7 +22,7 @@ public class WaitingList {
         return waitingList.poll();
     }
 
-    public Collection<Pet> getPets() {
+    public List<Pet> getPets() {
         return ImmutableList.copyOf(waitingList);
     }
 }
