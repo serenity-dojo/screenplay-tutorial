@@ -1,6 +1,6 @@
-# Vet Clinic Tutorial Project
+# Vet Clinic Tutorial Project - asking questions
 
-## Exercise 2 - asking questions
+## Exercise 2
 
 In this exercise, we will experiment with Question classes. We will implement a test that checks that, when the hotel is full, subsequent bookings are placed on a waiting list.
 
@@ -84,3 +84,11 @@ public class TheGuests {
 Next, implement the `TheGuestsOnTheWaitingList` question class. Try to implement it yourself; you can use the `getWaitingList()` method to return the actual list of pets on the waiting list.
  
 Now run the test and check that the correct reporting appears in the Serenity HTML report in the `target/site/serenity` directory.
+
+## Exercise 3
+
+Refactor the `petra_books_her_pet_cat_into_the_hotel()` to use the `should(seeThat(...))` construct.
+
+## Exercise 4
+
+Refactor the `petra_checks_her_cat_out_of_the_hotel()` to use the `should(seeThat(...))` construct.
