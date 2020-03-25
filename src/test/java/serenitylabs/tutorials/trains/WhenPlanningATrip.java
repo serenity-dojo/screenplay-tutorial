@@ -72,7 +72,23 @@ public class WhenPlanningATrip {
                         TheTarget.textOf(TFLSearchResultsPage.SEARCH_RESULTS_HEADING),equalTo("Search: Waterloo")
                 )
         );
+    }
 
+    @Test
+    public void should_list_all_relevant_station_information() {
+
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(TFLHomePage.ACCEPT_ALL_COOKIES),
+                Click.on(TFLHomePage.DONE),
+                Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
+        );
+
+        carrie.should(
+                seeThat(
+                        TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), containsString("Jubilee")
+                )
+        );
     }
 
 }
