@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import net.serenitybdd.screenplay.questions.targets.TheTarget;
 import net.thucydides.core.annotations.Managed;
@@ -50,6 +51,9 @@ public class WhenPlanningATrip {
     @Test
     public void the_status_updates_title_should_be_visible() {
 
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLStatusPage.class)
+        );
         carrie.should(
                 seeThat(
                         TheWebPage.title(),
@@ -71,26 +75,9 @@ public class WhenPlanningATrip {
     }
 
     @Test
-    public void should_list_all_relevant_station_information() {
-
-        carrie.attemptsTo(
-                Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
-        );
-
-        carrie.should(
-                seeThat(
-                        TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), containsString("Jubilee")
-                )
-        );
-    }
-
-    @Test
     public void should_see_status_updates() {
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(CookiesDialog.DONE),
-                Click.on(MenuBar.STATUS_UPDATES)
+                Click.on(MenuBar.STATUS_UPDATES.menuOption())
         );
 
         carrie.should(
@@ -99,5 +86,26 @@ public class WhenPlanningATrip {
                         hasItems("Bakerloo","Circle","Central")
                 )
         );
+    }
+
+    @Test
+    public void should_be_able_to_contact_tfl() {
+        carrie.attemptsTo(
+                Click.on(MenuBar.HELP_AND_CONTACTS.menuOption()),
+                Click.on(ContactForm.CONTACT_US)
+        );
+
+        carrie.attemptsTo(
+                SelectFromOptions.byVisibleText("Mrs").from(ContactForm.TITLE),
+                Enter.theValue("Sarah-Jane").into(ContactForm.FIRST_NAME),
+                Enter.theValue("Smith").into(ContactForm.LAST_NAME)
+        );
+
+        carrie.should(
+                seeThat(TheTarget.selectedValueOf(ContactForm.TITLE), equalTo("Mrs")),
+                seeThat(TheTarget.valueOf(ContactForm.FIRST_NAME), equalTo("Sarah-Jane")),
+                seeThat(TheTarget.valueOf(ContactForm.LAST_NAME), equalTo("Smith"))
+        );
+
     }
 }
