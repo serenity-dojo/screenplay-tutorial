@@ -34,12 +34,16 @@ public class WhenPlanningATrip {
     @Before
     public void setTheStage() {
         carrie.can(BrowseTheWeb.with(browser));
+
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE)
+        );
     }
 
     @Test
     public void the_TFL_page_title_should_be_visible() {
-
-        carrie.attemptsTo(Open.browserOn().the(TFLHomePage.class));
 
         carrie.should(
                 seeThat(
@@ -50,8 +54,9 @@ public class WhenPlanningATrip {
     @Test
     public void the_status_updates_title_should_be_visible() {
 
-        carrie.attemptsTo(Open.browserOn().the(TFLStatusPage.class));
-
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLStatusPage.class)
+        );
         carrie.should(
                 seeThat(
                         TheWebPage.title(),
@@ -62,9 +67,6 @@ public class WhenPlanningATrip {
     public void should_be_able_to_search_for_station_details() {
 
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
@@ -79,9 +81,6 @@ public class WhenPlanningATrip {
     public void should_list_all_relevant_station_information() {
 
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
