@@ -15,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import serenitylabs.tutorials.trains.questions.TheSearchResults;
+import serenitylabs.tutorials.trains.tasks.EnterContactDetails;
+import serenitylabs.tutorials.trains.tasks.Search;
 import serenitylabs.tutorials.trains.ui.*;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -64,12 +67,13 @@ public class WhenPlanningATrip {
     public void should_be_able_to_search_for_station_details() {
 
         carrie.attemptsTo(
-                Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
+                Search.forStation("Waterloo")
         );
 
         carrie.should(
                 seeThat(
-                        TheTarget.textOf(TFLSearchResultsPage.SEARCH_RESULTS_HEADING),equalTo("Search: Waterloo")
+                        "the search results heading",
+                        TheSearchResults.heading(), equalTo("Search: Waterloo")
                 )
         );
     }
@@ -83,7 +87,7 @@ public class WhenPlanningATrip {
         carrie.should(
                 seeThat(
                         TheTarget.textValuesOf(StatusUpdatesPage.SERVICE_LINES),
-                        hasItems("Bakerloo","Circle","Central")
+                        hasItems("Bakerloo", "Circle", "Central")
                 )
         );
     }
@@ -96,9 +100,7 @@ public class WhenPlanningATrip {
         );
 
         carrie.attemptsTo(
-                SelectFromOptions.byVisibleText("Mrs").from(ContactForm.TITLE),
-                Enter.theValue("Sarah-Jane").into(ContactForm.FIRST_NAME),
-                Enter.theValue("Smith").into(ContactForm.LAST_NAME)
+                EnterContactDetails.forCustomer("Mrs", "Sarah-Jane","Smith")
         );
 
         carrie.should(
