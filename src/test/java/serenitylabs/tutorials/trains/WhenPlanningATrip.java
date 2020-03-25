@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Managed;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import serenitylabs.tutorials.trains.ui.StatusUpdatesPage;
 import serenitylabs.tutorials.trains.ui.TFLHomePage;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -35,5 +36,17 @@ public class WhenPlanningATrip {
                         containsString("Transport for London")));
     }
 
+    @Test
+    public void the_status_updates_title_should_be_visible() {
+
+        carrie.can(BrowseTheWeb.with(browser));
+
+        carrie.attemptsTo(Open.browserOn().the(StatusUpdatesPage.class));
+
+        carrie.should(
+                seeThat(
+                        TheWebPage.title(),
+                        containsString("status updates")));
+    }
 
 }
