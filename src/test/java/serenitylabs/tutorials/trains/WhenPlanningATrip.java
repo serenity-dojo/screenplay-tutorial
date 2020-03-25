@@ -9,8 +9,6 @@ import net.thucydides.core.annotations.Managed;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
-import serenitylabs.tutorials.trains.ui.StatusUpdatesPage;
-import serenitylabs.tutorials.trains.ui.TFLHomePage;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.containsString;
