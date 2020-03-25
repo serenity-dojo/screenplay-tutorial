@@ -28,7 +28,7 @@ public class WhenPlanningATrip {
 
         carrie.can(BrowseTheWeb.with(browser));
 
-        carrie.attemptsTo(Open.browserOn().the(TFLHomePage.class));
+        carrie.attemptsTo(Open.url("https://tfl.gov.uk"));
 
         carrie.should(
                 seeThat(
@@ -41,7 +41,7 @@ public class WhenPlanningATrip {
 
         carrie.can(BrowseTheWeb.with(browser));
 
-        carrie.attemptsTo(Open.browserOn().the(StatusUpdatesPage.class));
+        carrie.attemptsTo(Open.url("https://tfl.gov.uk/tube-dlr-overground/status"));
 
         carrie.should(
                 seeThat(
