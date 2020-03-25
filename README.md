@@ -1,4 +1,4 @@
-# Vet Clinic Tutorial Project - asking questions
+# Screenplay Tutorial Project - asking questions
 
 ## Exercise 2
 
