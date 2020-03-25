@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import serenitylabs.tutorials.trains.ui.CookiesDialog;
 import serenitylabs.tutorials.trains.ui.TFLHomePage;
 import serenitylabs.tutorials.trains.ui.TFLSearchResultsPage;
 import serenitylabs.tutorials.trains.ui.TFLStatusPage;
@@ -62,8 +63,8 @@ public class WhenPlanningATrip {
 
         carrie.attemptsTo(
                 Open.browserOn().the(TFLHomePage.class),
-                Click.on(TFLHomePage.ACCEPT_ALL_COOKIES),
-                Click.on(TFLHomePage.DONE),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
@@ -79,8 +80,8 @@ public class WhenPlanningATrip {
 
         carrie.attemptsTo(
                 Open.browserOn().the(TFLHomePage.class),
-                Click.on(TFLHomePage.ACCEPT_ALL_COOKIES),
-                Click.on(TFLHomePage.DONE),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
