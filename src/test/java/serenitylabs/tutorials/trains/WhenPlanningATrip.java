@@ -14,14 +14,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import serenitylabs.tutorials.trains.ui.CookiesDialog;
-import serenitylabs.tutorials.trains.ui.TFLHomePage;
-import serenitylabs.tutorials.trains.ui.TFLSearchResultsPage;
-import serenitylabs.tutorials.trains.ui.TFLStatusPage;
+import serenitylabs.tutorials.trains.ui.*;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 public class WhenPlanningATrip {
@@ -34,12 +30,16 @@ public class WhenPlanningATrip {
     @Before
     public void setTheStage() {
         carrie.can(BrowseTheWeb.with(browser));
+
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE)
+        );
     }
 
     @Test
     public void the_TFL_page_title_should_be_visible() {
-
-        carrie.attemptsTo(Open.browserOn().the(TFLHomePage.class));
 
         carrie.should(
                 seeThat(
@@ -49,8 +49,6 @@ public class WhenPlanningATrip {
 
     @Test
     public void the_status_updates_title_should_be_visible() {
-
-        carrie.attemptsTo(Open.browserOn().the(TFLStatusPage.class));
 
         carrie.should(
                 seeThat(
@@ -62,9 +60,6 @@ public class WhenPlanningATrip {
     public void should_be_able_to_search_for_station_details() {
 
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
@@ -79,9 +74,6 @@ public class WhenPlanningATrip {
     public void should_list_all_relevant_station_information() {
 
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
@@ -92,4 +84,20 @@ public class WhenPlanningATrip {
         );
     }
 
+    @Test
+    public void should_see_status_updates() {
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE),
+                Click.on(MenuBar.STATUS_UPDATES)
+        );
+
+        carrie.should(
+                seeThat(
+                        TheTarget.textValuesOf(StatusUpdatesPage.SERVICE_LINES),
+                        hasItems("Bakerloo","Circle","Central")
+                )
+        );
+    }
 }
