@@ -9,5 +9,5 @@ public class CookiesDialog extends PageObject {
 //    public static final Target DONE = Target.the("Done").located(By.partialLinkText("Done"));
 
     public static final By ACCEPT_ALL_COOKIES = By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll");
-    public static final By DONE = By.className("cb-button");
+    public static final By DONE = By.xpath("//button[@onclick='endCookieProcess(); return false;']");
 }

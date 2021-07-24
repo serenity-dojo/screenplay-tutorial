@@ -98,7 +98,7 @@ public class WhenPlanningATrip {
 
         carrie.attemptsTo(
 
-                Click.on(TFLSearchResultsPage.FIRST_SEARCH_RESULT_LINK));
+                Click.on(TFLSearchResultsPage.FIRST_ARTICLE_HEADING));
 
         carrie.should(
                 seeThat(TheWebPage.title(),containsString("Jubilee"))
