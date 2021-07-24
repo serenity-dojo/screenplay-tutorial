@@ -73,35 +73,24 @@ public class WhenPlanningATrip {
                         equalTo("Search: Waterloo")
                 )
         );
-//        carrie.attemptsTo(
-//                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-//                Click.on(CookiesDialog.DONE)
-//                        );
-//
-//        carrie.attemptsTo(
-//                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-//                WaitUntil.the(CookiesDialog.DONE, isVisible()),
-//                //WaitUntil.the(CookiesDialog.DONE, isClickable()),
-//                Click.on(CookiesDialog.DONE)
-//        );
+
 
     }
 
     @Test
     public void should_list_all_relevant_station_information(){
-        carrie.attemptsTo(Open.browserOn().the(TFLHomePage.class),
+
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
+                Click.on(CookiesDialog.DONE),
                 Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
 
-        JavascriptExecutor jse = (JavascriptExecutor)browser;
-        jse.executeScript("arguments[0].click()", TFLSearchResultsPage.TEST);
-
-        carrie.attemptsTo(
-
-                Click.on(TFLSearchResultsPage.FIRST_ARTICLE_HEADING));
-
         carrie.should(
-                seeThat(TheWebPage.title(),containsString("Jubilee"))
+                seeThat(
+                        TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), containsString("Jubilee")
+                )
         );
 
     }
