@@ -14,10 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import serenitylabs.tutorials.trains.ui.CookiesDialog;
-import serenitylabs.tutorials.trains.ui.TFLHomePage;
-import serenitylabs.tutorials.trains.ui.TFLSearchResultsPage;
-import serenitylabs.tutorials.trains.ui.TFLStatusPage;
+import serenitylabs.tutorials.trains.ui.*;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.containsString;
@@ -89,6 +86,20 @@ public class WhenPlanningATrip {
                         TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), containsString("Jubilee")
                 )
         );
+    }
+
+    @Test
+    public void should_see_status_updates(){
+        carrie.attemptsTo(
+                Click.on(MenuBar.STATUS_UPDATES)
+        );
+
+//        carrie.should(
+//                seeThat(
+//                        TheTarget.textValuesOf(StatusUpdatesPage.SERVICE_LINES),
+//                        hasItems("Bakerloo","Circle","Central")
+//                )
+//        );
     }
 
 }
