@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import net.serenitybdd.screenplay.questions.targets.TheTarget;
 import net.thucydides.core.annotations.Managed;
@@ -14,11 +15,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import serenitylabs.tutorials.trains.questions.TheSearchResults;
+import serenitylabs.tutorials.trains.tasks.EnterContactDetails;
+import serenitylabs.tutorials.trains.tasks.Search;
 import serenitylabs.tutorials.trains.ui.*;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(SerenityRunner.class)
 public class WhenPlanningATrip {
@@ -62,16 +65,18 @@ public class WhenPlanningATrip {
 
     @Test
     public void should_be_able_to_search_for_station_details() {
-
+        
         carrie.attemptsTo(
-                Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
+                Search.forStation("Waterloo")
         );
 
         carrie.should(
                 seeThat(
-                        TheTarget.textOf(TFLSearchResultsPage.SEARCH_RESULTS_HEADING),equalTo("Search: Waterloo")
+                        "The search results heading",
+                        TheSearchResults.heading(), equalTo("Search: Waterloo")
                 )
         );
+
     }
 
     @Test
@@ -91,15 +96,34 @@ public class WhenPlanningATrip {
     @Test
     public void should_see_status_updates(){
         carrie.attemptsTo(
-                Click.on(MenuBar.STATUS_UPDATES)
+                Click.on(MenuBar.STATUS_UPDATES.menuOption())
         );
 
-//        carrie.should(
-//                seeThat(
-//                        TheTarget.textValuesOf(StatusUpdatesPage.SERVICE_LINES),
-//                        hasItems("Bakerloo","Circle","Central")
-//                )
-//        );
+        carrie.should(
+                seeThat(
+                        TheTarget.textValuesOf(StatusUpdatesPage.SERVICE_LINES),
+                        hasItems("Bakerloo","Circle","Central")
+                )
+        );
+    }
+
+    @Test
+    public void should_be_able_to_contact_tfl(){
+        carrie.attemptsTo(
+                Click.on(MenuBar.HELP_AND_CONTACTS.menuOption()),
+                Click.on(ContactForm.CONTACT_US)
+        );
+
+        carrie.attemptsTo(
+                EnterContactDetails.forCustomer("Mrs", "Sarah-Jane","Smith")
+        );
+
+        carrie.should(
+                seeThat(TheTarget.selectedValueOf(ContactForm.TITLE), equalTo("Mrs")),
+                seeThat(TheTarget.valueOf(ContactForm.FIRST_NAME), equalTo("Sarah-Jane")),
+                seeThat(TheTarget.valueOf(ContactForm.LAST_NAME), equalTo("Smith"))
+        );
     }
 
 }
+
