@@ -6,6 +6,6 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 
 public class CookiesDialog extends PageObject {
-    public static final By ACCEPT_ALL_COOKIES = By.linkText("Accept all cookies");
-    public static final By DONE = By.linkText("Done");
+    public static final By ACCEPT_ALL_COOKIES = By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll");
+    public static final By DONE = By.xpath("//button[@onclick='endCookieProcess(); return false;']");
 }
