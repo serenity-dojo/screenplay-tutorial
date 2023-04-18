@@ -1,4 +1,4 @@
-package serenitylabs.tutorials.vetclinic.features.tasks;
+package serenitylabs.tutorials.vetclinic.screenplay.tasks;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
@@ -12,7 +12,6 @@ public class CheckIn implements Performable {
     private PetHotel petHotel;
 
     public CheckIn(){}
-
     public CheckIn(Pet pet, PetHotel petHotel) {
         this.pet = pet;
         this.petHotel = petHotel;
@@ -31,12 +30,11 @@ public class CheckIn implements Performable {
     public static class CheckInBuilder {
         private Pet pet;
 
-        public CheckInBuilder(Pet pet) {
+        public CheckInBuilder(Pet pet){
             this.pet = pet;
         }
-
         public Performable into(PetHotel petHotel) {
-            return new CheckIn(pet,petHotel);
+            return new CheckIn(pet, petHotel);
         }
     }
 }
